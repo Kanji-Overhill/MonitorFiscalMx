@@ -36,8 +36,8 @@
     return h;
   }
 
-  function disclaimer(text) {
-    return el('p', 'mf-disclaimer', text || 'Esta información proviene de fuentes públicas del SAT. No sustituye la evaluación de un contador o asesor fiscal. Monitor Fiscal MX no está afiliado, respaldado ni certificado por el SAT.');
+  function disclaimer() {
+    return el('p', 'mf-disclaimer', 'Fuente pública del SAT (Art. 69-B). No sustituye asesoría fiscal ni implica afiliación con el SAT.');
   }
 
   function badge(statusKey) {
@@ -64,13 +64,12 @@
     options = options || {};
     clear();
     root.appendChild(header());
-    root.appendChild(badge('rfc_invalido'));
     root.appendChild(el(
       'p',
       'mf-message',
       options.initialValue
-        ? 'Corrige el RFC de este proveedor.'
-        : 'No se encontró un RFC en la ficha de este proveedor. Captúralo para consultar el listado 69-B.',
+        ? 'Actualiza el RFC de este proveedor:'
+        : 'Escribe el RFC de este proveedor para consultar el listado 69-B.',
     ));
 
     if (options.errorMessage) {
@@ -165,18 +164,13 @@
       root.appendChild(el('p', 'mf-message', 'Se encontró una coincidencia para este RFC en un listado público oficial del SAT.'));
     }
 
-    root.appendChild(el('p', 'mf-review-note', 'Este resultado debe ser revisado por un profesional fiscal.'));
-
     root.appendChild(buildActions([
       { label: 'Consultar de nuevo', primary: true, onClick: handlers.onRetry },
       { label: 'Ver historial', onClick: handlers.onHistory },
-      result.matched && result.source && result.source.official_url
-        ? { label: 'Abrir fuente oficial', onClick: handlers.onOpenSource }
-        : null,
       { label: 'Editar RFC', onClick: handlers.onEditRfc },
     ]));
 
-    root.appendChild(disclaimer(result.disclaimer));
+    root.appendChild(disclaimer());
   }
 
   function renderHistory(items, onBack) {
