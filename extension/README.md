@@ -125,12 +125,30 @@ apuntar a URLs hardcodeadas ni a tokens embebidos.
 
 ## 6. CSP / dominios permitidos
 
-`plugin-manifest.json` declara `cspDomains.connect-src` vacío porque, si las
-llamadas realmente pasan por el proxy server-to-server de "API
-Configurations", el navegador del widget no necesita contactar el backend
-directamente. Si al probar en vivo Zoho exige declarar el dominio del
-backend igualmente, agrégalo ahí (ver pendiente #6 en el documento de
-verificación).
+**Confirmado en vivo:** Zoho aplica una Content Security Policy al iframe del
+widget que por defecto solo permite `connect-src` hacia sus propios dominios
+(`*.zappsusercontent.com`, `*.zohostatic.com`, `*.sigmausercontent.com`,
+`*.qntrlusercontent.com`). Cualquier `fetch()` directo del widget a un
+dominio externo (como nuestro backend) se bloquea **aunque el backend tenga
+CORS bien configurado** — es una restricción de la plataforma, no del
+servidor.
+
+Si usas API Configurations (recomendado, ver punto 5), esto no aplica: la
+llamada la hace el servidor de Zoho, no el navegador, así que nunca choca con
+esta CSP.
+
+Si en cambio el widget llama directo con `fetch()` (atajo usado para
+pruebas rápidas, no recomendado para publicar — ver punto 5), tienes que
+declarar el dominio del backend en `plugin-manifest.json`:
+
+```json
+"cspDomains": {
+  "connect-src": ["https://tu-backend.example.com"]
+}
+```
+
+Ya está configurado así en este repo con
+`https://monitorfiscalmx-production.up.railway.app`.
 
 ## 7. Instalación como extensión privada
 
