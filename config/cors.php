@@ -19,13 +19,17 @@ return [
 
     'allowed_methods' => ['GET', 'POST'],
 
-    // La mayoría de las llamadas del widget pasan por "API Configurations"
-    // de Zoho (proxy server-to-server), que no está sujeto a CORS. Esta
-    // lista solo importa para pruebas directas desde el navegador durante
-    // el desarrollo local del widget (zet run) y debe mantenerse acotada.
+    // Atajo temporal: el widget llama directo con fetch() (ver
+    // monitor-fiscal-client.js) en vez de pasar por "API Configurations" de
+    // Zoho, así que sí queda sujeto a CORS. Zoho sirve los widgets desde
+    // subdominios aleatorios de zappsusercontent.com, por eso el patrón
+    // comodín en vez de una lista fija.
     'allowed_origins' => array_filter(explode(',', env('CORS_ALLOWED_ORIGINS', 'https://127.0.0.1:5000'))),
 
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => array_filter(explode(',', env(
+        'CORS_ALLOWED_ORIGIN_PATTERNS',
+        '#^https://[a-z0-9-]+\.zappsusercontent\.com$#'
+    ))),
 
     'allowed_headers' => ['Content-Type', 'Authorization', 'X-Requested-With'],
 
