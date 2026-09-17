@@ -45,6 +45,7 @@
         View.renderResult(result, {
           onRetry: runQuery,
           onHistory: showHistory,
+          onOpenSource: openSource,
           onEditRfc: function () {
             showRfcInput();
           },
@@ -70,6 +71,7 @@
             View.renderResult(currentResult, {
               onRetry: runQuery,
               onHistory: showHistory,
+              onOpenSource: openSource,
               onEditRfc: function () {
                 showRfcInput();
               },
@@ -82,6 +84,12 @@
       .catch(function (error) {
         View.renderError(describeError(error), showHistory);
       });
+  }
+
+  function openSource() {
+    if (currentResult && currentResult.source && currentResult.source.official_url) {
+      window.open(currentResult.source.official_url, '_blank', 'noopener');
+    }
   }
 
   function describeError(error) {
