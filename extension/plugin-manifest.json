@@ -13,6 +13,6 @@
   },
   "usedConnections": [],
   "cspDomains": {
-    "connect-src": ["https://monitorfiscalmx-production.up.railway.app"]
+    "connect-src": ["monitorfiscalmx-production.up.railway.app"]
   }
 }
