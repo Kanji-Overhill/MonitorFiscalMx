@@ -1,0 +1,6 @@
+{
+  "name": "monitor-fiscal-mx-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Monitor SAT de proveedores para Zoho Books (widget vendor.details.sidebar)."
+}

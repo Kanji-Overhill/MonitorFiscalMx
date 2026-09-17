@@ -1,0 +1,18 @@
+{
+  "locale": ["es", "en"],
+  "service": "FINANCE",
+  "modules": {
+    "widgets": [
+      {
+        "name": "monitor_fiscal_mx_vendor_sidebar",
+        "location": "vendor.details.sidebar",
+        "url": "/app/widgets/vendor-sidebar/index.html",
+        "logo": "/app/images/app_icon.svg"
+      }
+    ]
+  },
+  "usedConnections": [],
+  "cspDomains": {
+    "connect-src": []
+  }
+}

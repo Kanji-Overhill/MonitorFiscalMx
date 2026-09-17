@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitor Fiscal MX</title>
+  <!--
+    URL del SDK confirmada contra la página oficial "Sample Widget" de Zoho
+    Books (zoho.com/books/developer/widgets/sample-widget.html). Se vio una
+    segunda variante de dominio (js.zohostatic.com) en otra página oficial;
+    si `zet run`/`zet validate` reporta un 404, sustituye por la URL exacta
+    que genera `zet init` una vez autenticado. Ver docs/zoho-open-questions.md.
+  -->
+  <script src="https://static.zohocdn.com/zohofinance/v1.0/zf_sdk.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="monitor-fiscal-root" class="mf-widget" aria-live="polite">
+    <div class="mf-loading">Cargando…</div>
+  </div>
+
+  <script src="zoho-context.js"></script>
+  <script src="monitor-fiscal-client.js"></script>
+  <script src="widget-view.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
